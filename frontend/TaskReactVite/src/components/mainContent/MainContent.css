@@ -1,0 +1,67 @@
+.main {
+  position: relative;
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+
+  z-index: 1;
+}
+
+.main::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  background: linear-gradient(
+    120deg,
+    #0d184a,
+    #234cac,
+    #020617
+  );
+  background-size: 300% 300%;
+
+  animation: gradientMove 12s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.main h1 {
+  margin-bottom: 24px;
+  font-size: 2rem;
+  color: #e0f2fe;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  height: 140px;
+  border-radius: 16px;
+
+  background: rgba(71, 104, 255, 0.75);
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 600;
+  color: #7dd3fc;
+}

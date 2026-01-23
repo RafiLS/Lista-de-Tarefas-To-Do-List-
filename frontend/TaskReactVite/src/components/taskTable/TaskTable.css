@@ -1,0 +1,57 @@
+.task-table-container {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+.task-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(2, 6, 23, 0.85);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.task-table th,
+.task-table td {
+  padding: 12px 16px;
+  text-align: left;
+  color: #7dd3fc;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+.task-table th {
+  background: rgba(15, 23, 42, 0.9);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.task-table tr:hover {
+  background: rgba(56, 189, 248, 0.1);
+}
+
+.task-table .no-data {
+  text-align: center;
+  padding: 20px;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+/* Botões (opcional futurista) */
+.task-table button {
+  padding: 6px 12px;
+  margin-right: 6px;
+  border-radius: 8px;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  background: rgba(2, 6, 23, 0.7);
+  color: #7dd3fc;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.task-table button:hover {
+  background: rgba(56, 189, 248, 0.15);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+}
