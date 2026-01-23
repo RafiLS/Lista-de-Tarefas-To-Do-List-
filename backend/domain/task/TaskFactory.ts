@@ -8,11 +8,11 @@ import { Completed } from './Completed';
  */
 export class TaskFactory {
 
-  public static createTask(titleString: string): Task {
-    const title = Title.from(titleString);
-    return Task.create(title);
-  }
-
+ public static createTask(title: string): Task {
+  return Task.create(
+    Title.from(title)
+  );
+}
   public static rehydrateTask(
     id: TaskId,
     titleString: string,

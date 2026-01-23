@@ -1,6 +1,5 @@
 import { EntityId } from "./EntityId";
 
-
 export abstract class NumberEntityId extends EntityId {
 
   public get numericValue(): number {
@@ -11,7 +10,6 @@ export abstract class NumberEntityId extends EntityId {
     NumberEntityId.validateValue(value);
     super(value);
   }
-
 
   private static validateValue(value: number | string): void {
     if (value === null || value === undefined) {
@@ -46,7 +44,7 @@ export abstract class NumberEntityId extends EntityId {
   }
 
   public asString(): string {
-    return this.objValue?.toString() ?? '';
+    return this.objValue.toString();
   }
 
   public compareTo(other?: NumberEntityId): number {

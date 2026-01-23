@@ -1,4 +1,3 @@
-
 export abstract class EntityId {
   protected readonly objValue: any;
 

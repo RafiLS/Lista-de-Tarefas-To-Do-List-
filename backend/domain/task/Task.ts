@@ -18,8 +18,12 @@ export class Task extends AggregateRoot<TaskId> {
   }
 
   public static create(title: Title, completed?: Completed): Task {
-    return new Task(TaskId.create(), title, completed ?? Completed.from(false));
-  }
+  return new Task(
+    new TaskId(),
+    title,
+    completed ?? Completed.from(false)
+  );
+}
 
   public static rehydrate(id: TaskId, title: Title, completed: Completed): Task {
     return new Task(id, title, completed);

@@ -15,7 +15,14 @@ export class TaskMapper {
 
   static fromDTO(dto: TaskDTO): Task {
     return Task.rehydrate(
-      new TaskId(dto.id),
+      new TaskId(dto.id!),
+      Title.from(dto.title),
+      Completed.from(dto.completed ?? false)
+    );
+  }
+
+  static fromCreateDTO(dto: { title: string; completed: boolean }): Task {
+    return Task.create(
       Title.from(dto.title),
       Completed.from(dto.completed)
     );

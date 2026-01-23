@@ -1,12 +1,19 @@
-import { NumberEntityId } from "../common/NumberEntityId";
+import { EntityId } from '../common/EntityId';
 
-export class TaskId extends NumberEntityId {
-
-  constructor(value: number | string) {
-    super(value);
+export class TaskId extends EntityId {
+  constructor(value?: string) {
+    super(value ?? TaskId.generate());
   }
 
-  public static create(): TaskId {
-    return new TaskId(0);
+  protected createFromString(text: string): string {
+    return text;
+  }
+
+  public asString(): string {
+    return this.objValue;
+  }
+
+  private static generate(): string {
+    return Math.random().toString(36).substr(2, 9);
   }
 }

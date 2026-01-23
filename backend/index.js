@@ -2,30 +2,25 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 
+const taskRoutes = require('./routes/TaskRoutes').default;
+
 const app = express();
+
+// Middlewares
 app.use(cors());
 app.use(express.json());
 
-let tarefas = [];
-let idCounter = 1;
+app.use('/tasks', taskRoutes);
 
-// ===== CRUD Routes ===== //
-
-
-// =====  ===== //
-
-
-
-// test route
 app.get('/', (req, res) => {
-  res.send('Servidor Express funcionando!');
+  res.send('Express Server test');
 });
-
-module.exports = app;
 
 if (require.main === module) {
   const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
-});
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
 }
+
+module.exports = app;
