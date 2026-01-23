@@ -26,6 +26,6 @@ interface Task {
 
 ### REST Request Type
 - **Method:** DELETE
-- **Endpoint:** /tasks/{id}
+- **Endpoint:** /tasks/:id
 - **Type:** Implementation
 - **Description:** Remove a task

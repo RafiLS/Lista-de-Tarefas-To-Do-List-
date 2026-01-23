@@ -28,6 +28,6 @@ interface Task {
 
 ### REST Request Type
 - **Method:** PATCH
-- **Endpoint:** /tasks/{id}
+- **Endpoint:** /tasks/:id/complete
 - **Type:** Implementation
 - **Description:** Mark a Task as completed
