@@ -1,45 +1,43 @@
 import "./Sidebar.css";
+import { useTranslation } from "react-i18next";
 
 export default function Sidebar() {
+    const { t } = useTranslation();
     const handleCreate = () => {
-        console.log("Create task");
-        // fetch("/api/tasks", { method: "POST" })
+        console.log("Criar tarefa");
     };
 
     const handleList = () => {
-        console.log("List tasks");
-        // fetch("/api/tasks")
+        console.log("Listar tarefas");
     };
 
     const handleComplete = () => {
-        console.log("Mark as completed");
-        // fetch("/api/tasks/1", { method: "PUT" })
+        console.log("Marcar como concluída");
     };
 
     const handleRemove = () => {
-        console.log("Remove task");
-        // fetch("/api/tasks/1", { method: "DELETE" })
+        console.log("Remover tarefa");
     };
 
     return (
         <aside className="sidebar">
             { }
-            <h1 className="sidebar-title">Functionalities</h1>
+            <h1 className="sidebar-title">{t("sidebar.features")}</h1>
             <div className="sidebar-separator"></div>
 
             { }
             <ul>
                 <li>
-                    <button onClick={handleCreate}>Create task</button>
+                    <button onClick={handleCreate}>{t("sidebar.createTask")}</button>
                 </li>
                 <li>
-                    <button onClick={handleList}>List tasks</button>
+                    <button onClick={handleList}>{t("sidebar.listTasks")}</button>
                 </li>
                 <li>
-                    <button onClick={handleComplete}>Mark as completed</button>
+                    <button onClick={handleComplete}>{t("sidebar.completeTask")}</button>
                 </li>
                 <li>
-                    <button onClick={handleRemove}>Remove task</button>
+                    <button onClick={handleRemove}>{t("sidebar.removeTask")}</button>
                 </li>
             </ul>
         </aside>

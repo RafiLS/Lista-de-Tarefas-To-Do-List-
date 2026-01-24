@@ -2,7 +2,7 @@ import './App.css'
 import Sidebar from "./components/sidebarleft/Sidebar";
 import MainContent from "./components/mainContent/MainContent";
 import Header from "./components/header/Header";
-
+import './i18n';
 
 function App() {
   return (
@@ -11,11 +11,10 @@ function App() {
 
       <div className="app-body">
         <Sidebar />
-        <MainContent /> 
+        <MainContent />
       </div>
     </div>
   );
 }
-
 
 export default App

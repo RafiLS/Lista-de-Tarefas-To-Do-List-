@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { TaskService } from '../../services/taskService';
 import './TaskForm.css';
+import { useTranslation } from "react-i18next";
 
 export function TaskForm({ onTaskCreated }) {
+  const { t } = useTranslation();
   const [title, setTitle] = useState('');
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -11,11 +13,11 @@ export function TaskForm({ onTaskCreated }) {
     e.preventDefault();
 
     if (!title.trim()) {
-      setErrorMessage('O campo tem de ser preenchido');
+      setErrorMessage(t("taskForm.titleIsRequired"));
       return;
     }
 
-    setErrorMessage(''); // limpa mensagem se estiver preenchido
+    setErrorMessage('');
     setLoading(true);
 
     try {
@@ -24,7 +26,7 @@ export function TaskForm({ onTaskCreated }) {
       if (onTaskCreated) onTaskCreated();
     } catch (error) {
       console.error(error);
-      alert('Erro ao criar tarefa.');
+      alert(t("taskForm.errorCreatingTask"));
     } finally {
       setLoading(false);
     }
@@ -34,12 +36,12 @@ export function TaskForm({ onTaskCreated }) {
     <form className="task-form" onSubmit={handleSubmit}>
       <input
         type="text"
-        placeholder="Título da nova tarefa"
+        placeholder={t("taskForm.placeholder")}
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
       <button type="submit" disabled={loading}>
-        {loading ? 'Guardando...' : 'Guardar'}
+        {loading ? t("taskForm.saving...") : t("taskForm.save")}
       </button>
     </form>
   );

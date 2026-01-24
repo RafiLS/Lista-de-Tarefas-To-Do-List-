@@ -1,0 +1,43 @@
+{
+  "header": {
+    "title": "Liste de Tâches",
+    "language": "Langue"
+  },
+  "mainContent": {
+    "taskListTitle": "Liste de Tâches"
+  },
+  "sidebar": {
+    "features": "Fonctionnalités",
+    "createTask": "Créer une tâche",
+    "listTasks": "Lister les tâches",
+    "completeTask": "Terminer la tâche",
+    "removeTask": "Supprimer la tâche"
+  },
+  "taskForm": {
+    "titleRequired": "Le titre est obligatoire.",
+    "saving": "Enregistrement...",
+    "save": "Enregistrer",
+    "errorCreatingTask": "Erreur lors de la création de la tâche.",
+    "placeholder": "Nouveau titre de la tâche"
+  },
+  "taskTable": {
+    "taskRemovedSuccessfully": "Tâche supprimée avec succès",
+    "taskRemoveFailed": "Échec de la suppression de la tâche.",
+    "completedTasks": "Tâches terminées",
+    "failedToComplete": "Échec de la finalisation de la tâche.",
+    "pendingTasks": "Tâches en attente",
+    "totalTasks": "Total des tâches",
+    "taskName": "Nom de la tâche",
+    "status": "Statut",
+    "actions": "Actions",
+    "noTasks": "Aucune tâche disponible",
+    "completed 🟢": "Terminée 🟢",
+    "pending 🟡": "En attente 🟡",
+    "complete": "Terminer",
+    "remove": "Supprimer",
+    "taskCreatedSuccessfully": "Tâche créée avec succès",
+    "taskFindingError": "Erreur lors de la récupération des tâches",
+    "percentage": "Pourcentage"
+  },
+  "main": {}
+}

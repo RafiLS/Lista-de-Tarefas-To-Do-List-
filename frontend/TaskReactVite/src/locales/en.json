@@ -1,0 +1,43 @@
+{
+    "header": {
+        "title": "To-Do List",
+        "language": "Language"
+    },
+    "mainContent": {
+        "taskListTitle": "Task List"
+    },
+    "sidebar": {
+        "features": "Features",
+        "createTask": "Create Task",
+        "listTasks": "List Tasks",
+        "completeTask": "Complete Task",
+        "removeTask": "Remove Task"
+    },
+    "taskForm": {
+        "titleIsRequired": "Title is required.",
+        "saving...": "Saving...",
+        "save": "Save",
+        "errorCreatingTask": "Error creating task.",
+        "placeholder": "New task title"
+    },
+    "taskTable": {
+        "taskRemovedSuccessfully": "Task removed successfully",
+        "failedToRemoveTask": "Failed to remove task.",
+        "completedTasks": "Completed tasks",
+        "failedToComplete": "Failed to complete task.",
+        "pendingTasks": "Pending tasks",
+        "totalTasks": "Total tasks",
+        "taskName": "Task Name",
+        "status": "Status",
+        "actions": "Actions",
+        "noTasks": "No tasks available",
+        "completed 🟢": "Completed 🟢",
+        "pending 🟡": "Pending 🟡",
+        "complete": "Complete",
+        "remove": "Remove",
+        "taskCreatedSuccessfully": "Task created successfully",
+        "taskFindingError": "Error fetching tasks",
+        "percentage": "Percentage"
+    },
+    "main": {}
+}

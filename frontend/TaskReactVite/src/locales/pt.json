@@ -1,0 +1,43 @@
+{
+    "header": {
+        "title": "Lista de Tarefas",
+        "language": "Línguagem"
+    },
+    "mainContent": {
+        "taskListTitle": "Lista de Tarefas"
+    },
+    "sidebar": {
+        "features": "Funcionalidades",
+        "createTask": "Criar Tarefa",
+        "listTasks": "Listar Tarefas",
+        "completeTask": "Completar Tarefa",
+        "removeTask": "Remover Tarefa"
+    },
+    "taskForm": {
+        "titleRequired": "O título é obrigatório.",
+        "saving": "A guardar...",
+        "save": "Guardar",
+        "errorCreatingTask": "Erro ao criar tarefa.",
+        "placeholder": "Novo título da tarefa"
+    },
+    "taskTable": {
+        "taskRemovedSuccessfully": "Tarefa removida com sucesso",
+        "taskRemoveFailed": "Falha ao remover tarefa.",
+        "completedTasks": "Tarefas concluídas",
+        "failedToComplete": "Falha ao completar tarefa.",
+        "pendingTasks": "Tarefas pendentes",
+        "totalTasks": "Total de tarefas",
+        "taskName": "Nome da Tarefa",
+        "status": "Estado",
+        "actions": "Ações",
+        "noTasks": "Nenhuma tarefa disponível",
+        "completed 🟢": "Concluída 🟢",
+        "pending 🟡": "Pendente 🟡",
+        "complete": "Completar",
+        "remove": "Remover",
+        "taskCreatedSuccessfully": "Tarefa criada com sucesso",
+        "taskFindingError": "Erro ao buscar tarefas",
+        "percentage": "Percentagem"
+    },
+    "main": {}
+}

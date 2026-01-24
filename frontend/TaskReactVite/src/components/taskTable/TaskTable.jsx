@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { TaskService } from "../../services/taskService";
 import { TaskForm } from "../TaskForm/TaskForm";
 import "./TaskTable.css";
+import { useTranslation } from "react-i18next";
 
 export default function TaskTable() {
+  const { t } = useTranslation();
   const [tasks, setTasks] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -13,7 +15,7 @@ export default function TaskTable() {
       const data = await TaskService.getAllTasks();
       setTasks(data);
     } catch (error) {
-      console.error("Erro ao buscar tarefas:", error);
+      console.error(t("taskTable.taskFindingError"), error);
     }
   };
 
@@ -25,20 +27,20 @@ export default function TaskTable() {
   const handleCompleteTask = async (id) => {
     try {
       await TaskService.completeTask(id);
-      showTempMessage("Tarefa marcada como concluída");
+      showTempMessage(t("taskTable.completedTasks"));
       fetchTasks();
     } catch (error) {
-      console.error("Erro ao completar tarefa:", error);
+      console.error(t("taskTable.failedToComplete"), error);
     }
   };
 
   const handleDeleteTask = async (id) => {
     try {
       await TaskService.deleteTask(id);
-      showTempMessage("Tarefa removida com sucesso");
+      showTempMessage(t("taskTable.taskRemovedSuccessfully"));
       fetchTasks();
     } catch (error) {
-      console.error("Erro ao remover tarefa:", error);
+      console.error(t("taskTable.failedToRemoveTask"), error);
     }
   };
 
@@ -50,35 +52,48 @@ export default function TaskTable() {
     fetchTasks();
   }, []);
 
+  const completedCount = tasks.filter(task => task.completed).length;
+  const pendingCount = tasks.filter(task => !task.completed).length;
+  const totalCount = tasks.length;
+  const completionPercentage = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
+
   return (
     <div className="task-table-container">
+      { }
+      <div className="task-summary">
+        <span>{t("taskTable.percentage")}: {completionPercentage}%</span>
+        <span>{t("taskTable.completedTasks")}: {completedCount}</span>
+        <span>{t("taskTable.pendingTasks")}: {pendingCount}</span>
+        <span>{t("taskTable.totalTasks")}: {totalCount}</span>
+      </div>
+
       <table className="task-table">
         <thead>
           <tr>
-            <th>Nome da Tarefa</th>
-            <th>Estado</th>
-            <th>Ações</th>
+            <th>{t("taskTable.taskName")}</th>
+            <th>{t("taskTable.status")}</th>
+            <th>{t("taskTable.actions")}</th>
           </tr>
         </thead>
         <tbody>
           {tasks.length === 0 ? (
             <tr>
               <td colSpan="3" className="no-data">
-                Nenhuma tarefa disponível
+                {t("taskTable.noTasks")}
               </td>
             </tr>
           ) : (
             tasks.map((task) => (
               <tr key={task.id}>
                 <td>{task.title}</td>
-                <td>{task.completed ? "Concluída 🟢" : "Pendente 🟡"}</td>
+                <td>{task.completed ? t("taskTable.completed 🟢") : t("taskTable.pending 🟡")}</td>
                 <td>
                   {!task.completed && (
                     <button onClick={() => handleCompleteTask(task.id)}>
-                      Completar
+                      {t("taskTable.complete")}
                     </button>
                   )}
-                  <button onClick={() => handleDeleteTask(task.id)}>Remover</button>
+                  <button onClick={() => handleDeleteTask(task.id)}>{t("taskTable.remove")}</button>
                 </td>
               </tr>
             ))
@@ -86,24 +101,21 @@ export default function TaskTable() {
         </tbody>
       </table>
 
-      { }
       <button className="add-task-button" onClick={handleAddTask}>
         +
       </button>
 
-      { }
-      {showForm && <TaskForm onTaskCreated={() => {
-        fetchTasks(); setShowForm(false);
-        showTempMessage("Tarefa criada com sucesso");
-      }} />}
-
-
-      { }
-      {successMessage && (
-        <div className="success-message">
-          {successMessage}
-        </div>
+      {showForm && (
+        <TaskForm
+          onTaskCreated={() => {
+            fetchTasks();
+            setShowForm(false);
+            showTempMessage(t("taskTable.taskCreatedSuccessfully"));
+          }}
+        />
       )}
+
+      {successMessage && <div className="success-message">{successMessage}</div>}
     </div>
   );
 }
