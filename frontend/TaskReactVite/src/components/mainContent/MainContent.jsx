@@ -4,7 +4,7 @@ import TaskTable from "../taskTable/TaskTable";
 export default function MainContent() {
   return (
     <main className="main">
-      <h1>Painel Central</h1>
+      <h1>Lista de Tarefas</h1>
       <div className="cards">
          <TaskTable />
       </div>
