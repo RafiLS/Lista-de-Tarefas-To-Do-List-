@@ -31,3 +31,9 @@ interface Task {
 - **Endpoint:** /tasks
 - **Type:** Implementation
 - **Description:** List all Tasks
+
+## GET with postman
+![GET with postman](GET-postman.png)
+
+## Frontend Create Task
+![GET frontend](GET-frontend.png)

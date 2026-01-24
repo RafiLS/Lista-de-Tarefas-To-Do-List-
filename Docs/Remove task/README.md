@@ -29,3 +29,9 @@ interface Task {
 - **Endpoint:** /tasks/:id
 - **Type:** Implementation
 - **Description:** Remove a task
+
+## DELETE with postman
+![DELETE with postman](DELETE-postman.png)
+
+## Frontend Create Task
+![DELETE frontend](DELETE-frontend.png)

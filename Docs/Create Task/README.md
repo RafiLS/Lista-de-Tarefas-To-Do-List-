@@ -33,3 +33,10 @@ interface Task {
 - **Endpoint:** /tasks
 - **Type:** Implementation
 - **Description:** Create a Task
+
+
+## POST with postman
+![POST with postman](POST-postman.png)
+
+## Frontend Create Task
+![POST with postman](POST-frontend.png)

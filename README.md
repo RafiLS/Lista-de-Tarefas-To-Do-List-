@@ -31,7 +31,7 @@ Backend (Node.js + MongoDB)
 
 ## Frontend
 
-Frontend (React – Vite or Next.js)
+Frontend (React – Vite)
 
 - Display all tasks
 - Add new task
@@ -39,12 +39,26 @@ Frontend (React – Vite or Next.js)
 - Remove task
 - Consume the API with fetch or axios
 
-Extras (Optional)
+## Othes features:
 
-- React Query / TanStack
-- Zustand
-- Authentication (JWT)
-
+#### - The system supports 4 languages ​​(Portuguese, English, French, and Spanish).
+#### - The system contains information on the percentage of tasks completed, completed tasks, pending tasks, and total tasks for informational purposes.
 
 ## How to Run the Project
 
+Additional information for running:
+
+- Docker to Running MongoDB;
+- Node.js (npm install)
+
+
+* "npm install" for the frontend and for the backend
+
+#### Run backend
+```bash
+(...)\Lista-de-Tarefas\backend> npm run dev
+```
+#### Run frontend
+```bash
+(...)\Lista-de-Tarefas\frontend\TaskReactVite> npm run dev
+```

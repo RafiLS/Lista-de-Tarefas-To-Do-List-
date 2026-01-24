@@ -31,3 +31,10 @@ interface Task {
 - **Endpoint:** /tasks/:id/complete
 - **Type:** Implementation
 - **Description:** Mark a Task as completed
+
+## PATCH with postman
+![PATCH with postman](PATCH-postman.png)
+
+## Frontend Create Task
+![PATCH frontend](PATCH-frontend.png)
+
