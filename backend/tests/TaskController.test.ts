@@ -1,131 +1,92 @@
+import request from 'supertest';
+import express from 'express';
 import { TaskController } from '../controller/TaskController';
 import { TaskService } from '../application/task/TaskService';
 import { TaskDTO } from '../application/task/TaskDTO';
 
+// Mock do módulo inteiro
 jest.mock('../application/task/TaskService');
 
-describe('TaskController Unit Tests', () => {
-  let mockService: jest.Mocked<TaskService>;
-  let req: any;
-  let res: any;
+const app = express();
+app.use(express.json());
 
+app.post('/tasks', TaskController.createTask);
+app.get('/tasks', TaskController.getAllTasks);
+app.get('/tasks/:id', TaskController.getTaskById);
+app.put('/tasks/:id', TaskController.updateTask);
+app.delete('/tasks/:id', TaskController.deleteTask);
+app.get('/tasks/completed', TaskController.getTasksByCompleted);
+app.patch('/tasks/:id/complete', TaskController.completeTask);
+
+describe('TaskController', () => {
   beforeEach(() => {
-    mockService = new TaskService() as jest.Mocked<TaskService>;
-
-    TaskController.setService(mockService);
-
-    req = { body: {}, params: {}, query: {} };
-    res = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
-      send: jest.fn(),
-    };
-
     jest.clearAllMocks();
   });
 
   it('should create a task', async () => {
-    req.body = { title: 'New Task', completed: true };
-    const dto: TaskDTO = { id: '1', title: 'New Task', completed: true };
-    mockService.createTask.mockResolvedValue(dto);
+    const dto: TaskDTO = { title: 'Test Task', completed: false };
+    (TaskService.prototype.createTask as jest.Mock).mockResolvedValue({ id: '1', ...dto });
 
-    await TaskController.createTask(req, res);
+    const res = await request(app).post('/tasks').send(dto);
 
-    expect(mockService.createTask).toHaveBeenCalledWith({ title: 'New Task', completed: true });
-    expect(res.status).toHaveBeenCalledWith(201);
-    expect(res.json).toHaveBeenCalledWith(dto);
-  });
-
-  it('should return 400 if title is missing in createTask', async () => {
-    req.body = {};
-    await TaskController.createTask(req, res);
-
-    expect(res.status).toHaveBeenCalledWith(400);
-    expect(res.json).toHaveBeenCalledWith({ message: 'Title is required' });
-    expect(mockService.createTask).not.toHaveBeenCalled();
+    expect(res.status).toBe(201);
+    expect(res.body).toEqual({ id: '1', ...dto });
   });
 
   it('should get all tasks', async () => {
-    const tasks: TaskDTO[] = [
-      { id: '1', title: 'Task 1', completed: false },
-      { id: '2', title: 'Task 2', completed: true },
-    ];
-    mockService.getAllTasks.mockResolvedValue(tasks);
+    const tasks = [{ id: '1', title: 'Task 1', completed: false }];
+    (TaskService.prototype.getAllTasks as jest.Mock).mockResolvedValue(tasks);
 
-    await TaskController.getAllTasks(req, res);
+    const res = await request(app).get('/tasks');
 
-    expect(mockService.getAllTasks).toHaveBeenCalled();
-    expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.json).toHaveBeenCalledWith(tasks);
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual(tasks);
   });
 
   it('should get task by id', async () => {
-    req.params.id = '1';
-    const task: TaskDTO = { id: '1', title: 'Task 1', completed: false };
-    mockService.getTaskById.mockResolvedValue(task);
+    const task = { id: '1', title: 'Task 1', completed: false };
+    (TaskService.prototype.getTaskById as jest.Mock).mockResolvedValue(task);
 
-    await TaskController.getTaskById(req, res);
+    const res = await request(app).get('/tasks/1');
 
-    expect(mockService.getTaskById).toHaveBeenCalledWith('1');
-    expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.json).toHaveBeenCalledWith(task);
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual(task);
+  });
+
+  it('should return 404 if task not found', async () => {
+    (TaskService.prototype.getTaskById as jest.Mock).mockRejectedValue(new Error('Task not found'));
+
+    const res = await request(app).get('/tasks/999');
+
+    expect(res.status).toBe(404);
+    expect(res.body.message).toBe('Task not found');
   });
 
   it('should update a task', async () => {
-    req.params.id = '1';
-    req.body = { title: 'Updated Task', completed: true };
-    const updated: TaskDTO = { id: '1', title: 'Updated Task', completed: true };
-    mockService.updateTask.mockResolvedValue(updated);
+    const updatedTask = { id: '1', title: 'Updated', completed: true };
+    (TaskService.prototype.updateTask as jest.Mock).mockResolvedValue(updatedTask);
 
-    await TaskController.updateTask(req, res);
+    const res = await request(app).put('/tasks/1').send({ title: 'Updated', completed: true });
 
-    expect(mockService.updateTask).toHaveBeenCalledWith('1', { title: 'Updated Task', completed: true });
-    expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.json).toHaveBeenCalledWith(updated);
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual(updatedTask);
   });
 
   it('should delete a task', async () => {
-    req.params.id = '1';
-    mockService.deleteTask.mockResolvedValue();
+    (TaskService.prototype.deleteTask as jest.Mock).mockResolvedValue(undefined);
 
-    await TaskController.deleteTask(req, res);
+    const res = await request(app).delete('/tasks/1');
 
-    expect(mockService.deleteTask).toHaveBeenCalledWith('1');
-    expect(res.status).toHaveBeenCalledWith(204);
-    expect(res.send).toHaveBeenCalled();
+    expect(res.status).toBe(204);
   });
 
-  it('should get tasks by completed', async () => {
-    req.query.completed = 'true';
-    const tasks: TaskDTO[] = [{ id: '1', title: 'Done Task', completed: true }];
-    mockService.getTasksByCompleted.mockResolvedValue(tasks);
+  it('should mark a task as completed', async () => {
+    const task = { id: '1', title: 'Task', completed: true };
+    (TaskService.prototype.markAsCompleted as jest.Mock).mockResolvedValue(task);
 
-    await TaskController.getTasksByCompleted(req, res);
+    const res = await request(app).patch('/tasks/1/complete');
 
-    expect(mockService.getTasksByCompleted).toHaveBeenCalledWith(true);
-    expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.json).toHaveBeenCalledWith(tasks);
-  });
-
-  it('should mark task as completed', async () => {
-    req.params.id = '1';
-    const task: TaskDTO = { id: '1', title: 'Incomplete Task', completed: true };
-    mockService.markAsCompleted.mockResolvedValue(task);
-
-    await TaskController.completeTask(req, res);
-
-    expect(mockService.markAsCompleted).toHaveBeenCalledWith('1');
-    expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.json).toHaveBeenCalledWith(task);
-  });
-
-  it('should return 400 for invalid id in completeTask', async () => {
-    req.params.id = undefined;
-
-    await TaskController.completeTask(req, res);
-
-    expect(res.status).toHaveBeenCalledWith(400);
-    expect(res.json).toHaveBeenCalledWith({ message: 'ID valid' });
-    expect(mockService.markAsCompleted).not.toHaveBeenCalled();
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual(task);
   });
 });

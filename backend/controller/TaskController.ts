@@ -2,15 +2,9 @@ import { Request, Response } from 'express';
 import { TaskService } from '../application/task/TaskService';
 import { TaskDTO } from '../application/task/TaskDTO';
 
+const taskService = new TaskService();
 
 export class TaskController {
-
-   private static taskService: TaskService;
-
-  public static setService(service: TaskService) {
-    this.taskService = service;
-  }
-  
   static async createTask(req: Request, res: Response) {
     try {
       const dto: TaskDTO = {
@@ -21,7 +15,7 @@ export class TaskController {
       if (!dto.title)
         return res.status(400).json({ message: 'Title is required' });
 
-      const task = await this.taskService.createTask(dto);
+      const task = await taskService.createTask(dto);
       res.status(201).json(task);
 
     } catch (error: any) {
@@ -31,7 +25,7 @@ export class TaskController {
 
   static async getAllTasks(req: Request, res: Response) {
     try {
-      const tasks = await this.taskService.getAllTasks();
+      const tasks = await taskService.getAllTasks();
       res.status(200).json(tasks);
     } catch (error: any) {
       res.status(500).json({ message: error.message });
@@ -40,7 +34,7 @@ export class TaskController {
 
   static async getTaskById(req: Request, res: Response) {
     try {
-      const task = await this.taskService.getTaskById(req.params.id as string);
+      const task = await taskService.getTaskById(req.params.id as string);
       res.status(200).json(task);
     } catch (error: any) {
       res.status(404).json({ message: error.message });
@@ -50,7 +44,7 @@ export class TaskController {
   static async updateTask(req: Request, res: Response) {
     try {
       const dto: TaskDTO = { title: req.body.title, completed: req.body.completed };
-      const task = await this.taskService.updateTask(req.params.id as string, dto);
+      const task = await taskService.updateTask(req.params.id as string, dto);
       res.status(200).json(task);
     } catch (error: any) {
       res.status(400).json({ message: error.message });
@@ -59,7 +53,7 @@ export class TaskController {
 
   static async deleteTask(req: Request, res: Response) {
     try {
-      await this.taskService.deleteTask(req.params.id as string);
+      await taskService.deleteTask(req.params.id as string);
       res.status(204).send();
     } catch (error: any) {
       res.status(400).json({ message: error.message });
@@ -69,7 +63,7 @@ export class TaskController {
   static async getTasksByCompleted(req: Request, res: Response) {
     try {
       const completed = req.query.completed === 'true';
-      const tasks = await this.taskService.getTasksByCompleted(completed);
+      const tasks = await taskService.getTasksByCompleted(completed);
       res.status(200).json(tasks);
     } catch (error: any) {
       res.status(500).json({ message: error.message });
@@ -84,7 +78,7 @@ export class TaskController {
       return res.status(400).json({ message: 'ID valid' });
     }
 
-    const task: TaskDTO = await this.taskService.markAsCompleted(taskIdParam);
+    const task: TaskDTO = await taskService.markAsCompleted(taskIdParam);
     res.status(200).json(task);
   } catch (error: any) {
     res.status(400).json({ message: error.message });
