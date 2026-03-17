@@ -1,0 +1,9 @@
+[38;2;0;200;0m2026-03-17 17:32:22,401:root:INFO:No config file provided, using default config path: .dirty-waters.json[0m
+[38;2;255;255;0m2026-03-17 17:32:22,401:root:WARNING:Config file not found at .dirty-waters.json, using default config: {'ignore': {}, 'revisions': {}}[0m
+[38;2;0;200;0m2026-03-17 17:32:22,402:root:INFO:Configuration after conflict solving: {'ignore': {}, 'revisions': {}}[0m
+[38;2;0;200;0m2026-03-17 17:32:22,402:root:INFO:Software supply chain smells analysis for RafiLS/Lista-de-Tarefas-To-Do-List- for version 253671c95f9bbd2cff08b1f5922bac9476bd1ce6...[0m
+[38;2;0;200;0m2026-03-17 17:32:22,403:root:INFO:Gradual report generation is enabled.[0m
+[38;2;0;200;0m2026-03-17 17:32:22,403:root:INFO:Getting dependencies for RafiLS/Lista-de-Tarefas-To-Do-List-@253671c95f9bbd2cff08b1f5922bac9476bd1ce6...[0m
+[38;2;0;200;0m2026-03-17 17:32:22,404:root:INFO:Package manager: npm[0m
+[38;2;0;200;0m2026-03-17 17:32:54,259:root:INFO:Getting package-lock.json for RafiLS/Lista-de-Tarefas-To-Do-List-@253671c95f9bbd2cff08b1f5922bac9476bd1ce6[0m
+[38;2;255;0;0m2026-03-17 17:32:54,927:root:ERROR:Failed to get package-lock.json.[0m
